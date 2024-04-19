@@ -49,6 +49,6 @@ public class CurrencyPairConversion {
 
     @Override
     public String toString() {
-        return "Base: " + this.baseCode + "Target: " + this.targetCode + "Amount: " + this.amount;
+        return String.format("El valor de %,.2f %s corresponde al valor final de >>> %,.2f %s", this.amount, this.baseCode, this.amountConverted, this.targetCode);
     }
 }

@@ -56,11 +56,11 @@ public class Main {
                 System.out.printf("Ingresa el monto que deseas convertir de '%s' a '%s': %n", currencyPairConversion.getBaseCode(), currencyPairConversion.getTargetCode());
                 double userAmount = input.nextDouble();
                 currencyPairConversion.setAmount(userAmount);
-
-                System.out.println(currencyPairConversion);
-                // Cambiar moneda del listado
+                // Operacion con la API
                 consulter.exchangeCurrencyPair(currencyPairConversion);
-                System.out.println("Operaciones re locas");
+                // Imprimir final
+                System.out.println(currencyPairConversion);
+                System.out.println("******************************************************************************************");
             }
 //            else if (option == 2 ) {
 //
