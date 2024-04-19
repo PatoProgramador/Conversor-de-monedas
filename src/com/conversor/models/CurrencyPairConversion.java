@@ -46,4 +46,9 @@ public class CurrencyPairConversion {
     public void setCreatedAt(String createdAt) {
         this.createdAt = createdAt;
     }
+
+    @Override
+    public String toString() {
+        return "Base: " + this.baseCode + "Target: " + this.targetCode + "Amount: " + this.amount;
+    }
 }
