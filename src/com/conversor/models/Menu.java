@@ -8,7 +8,8 @@ public class Menu {
 
     private String menuItems = """
             1. Hacer conversión de moneda.
-            2. Cambiar una moneda de la lista de disponibles.
+            2. Ver el listado actual de monedas.
+            3. Cambiar una moneda de la lista de disponibles.
             7. Salir""";
 
     public List<Country> getInitalCountryList() {

@@ -33,6 +33,7 @@ public class Main {
             option = input.nextInt();
             // hacer conversion
             if (option == 1) {
+                System.out.println("******************************************************************************************");
                 CurrencyPairConversion currencyPairConversion = new CurrencyPairConversion();
                 menu.showCountries();
                 System.out.println("Selecciona la moneda base (Por ej. 1): ");
@@ -59,13 +60,18 @@ public class Main {
                 // Operacion con la API
                 consulter.exchangeCurrencyPair(currencyPairConversion);
                 // Imprimir final
+                System.out.println("******************************************************************************************");
                 System.out.println(currencyPairConversion);
                 System.out.println("******************************************************************************************");
-            }
-//            else if (option == 2 ) {
-//
-//            }
-        }
+            } else if (option == 2 ) {
+                System.out.println("******************************************************************************************");
+                menu.showCountries();
+                System.out.println("******************************************************************************************");
+            } else if (option == 3) {
 
+            } else {
+                System.out.println("Opcion invalida, intenta ingresando alguna del menu :D");
+            }
+        }
     }
 }
