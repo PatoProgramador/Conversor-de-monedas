@@ -31,6 +31,9 @@ public class Main {
                     case 4:
                         app.fourthOption();
                         break;
+                    case 5:
+                        app.fiveOption();
+                        break;
                     case 7:
                         app.appFinalMessage();
                         break;

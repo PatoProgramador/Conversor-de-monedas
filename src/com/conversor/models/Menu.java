@@ -37,6 +37,19 @@ public class Menu {
         }
     }
 
+    public void showUserHistory(List<CurrencyPairConversion> currencyPairConversions) {
+        System.out.println("-----Historial de conversiones hechas-----");
+        for (int i = 0; i < currencyPairConversions.size(); i++) {
+            CurrencyPairConversion currentCurrencyPair = currencyPairConversions.get(i);
+            double amount = currentCurrencyPair.getAmount();
+            double amountConverted = currentCurrencyPair.getAmountConverted();
+            String baseCode = currentCurrencyPair.getBaseCode();
+            String targetCode = currentCurrencyPair.getTargetCode();
+            String date = currentCurrencyPair.getCreatedAt();
+            System.out.printf("%d. %s: Monto de %,.2f'%s' a '%s' >>> Valor de final de %,.2f %s.\n", i + 1, date, amount, baseCode, targetCode, amountConverted, targetCode);
+        }
+    }
+
     public void appFinalMessage() {
         System.out.println("¡Muchas gracias por usar el conversor de moneda!");
         System.out.println("Saliendo de la app....");

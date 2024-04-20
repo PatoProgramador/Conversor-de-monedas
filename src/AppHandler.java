@@ -1,7 +1,4 @@
-import com.conversor.models.ConsultAPI;
-import com.conversor.models.Country;
-import com.conversor.models.CurrencyPairConversion;
-import com.conversor.models.Menu;
+import com.conversor.models.*;
 import com.conversor.models.utils.Validator;
 
 import java.util.ArrayList;
@@ -10,14 +7,16 @@ import java.util.Scanner;
 
 public class AppHandler extends Menu {
     private final Scanner userInput = new Scanner(System.in);
-    CurrencyPairConversion currencyPairConversion = new CurrencyPairConversion();
-    private Validator validate = new Validator();
-    ConsultAPI consulter = new ConsultAPI();
+    private final Validator validate = new Validator();
+    private UserHistory userHistory = new UserHistory();
+    private final ConsultAPI consulter = new ConsultAPI();
     private int option = 0;
     private int apiCalls = 0;
+    private String continueMessage = "";
 
     public void firstOption() {
         while (this.getOption() == 1) {
+            CurrencyPairConversion currencyPairConversion = new CurrencyPairConversion();
             System.out.println("******************************************************************************************");
             // lista actual de paises y scanner
             List<Country> countries = this.getInitalCountryList();
@@ -47,15 +46,15 @@ public class AppHandler extends Menu {
             currencyPairConversion.setAmount(userAmount);
             // Operacion con la API
             consulter.exchangeCurrencyPair(currencyPairConversion);
+            // historial
+            userHistory.setUserHistoryList(currencyPairConversion);
+            System.out.println(this.userHistory.getUserConversionList());
             // Imprimir final
             System.out.println("******************************************************************************************");
             System.out.println(currencyPairConversion);
-            System.out.println("******************************************************************************************");
             // continuidad de la opción
-            System.out.println("¿Deseas realizar otra conversión de moneda? 'S' para continuar o 'N' para regresar al menu inicial: ");
-            validate.setDecision(input.next());
-            // se setea la opcion entre 1 y 0 dependiendo la validacion
-            setOption(validate.validateUserDecision(input, 1));
+            setContinueMessage("¿Deseas realizar otra conversión de moneda?");
+            continueOptionWithTwoOptions(this.getContinueMessage(), this.getOption());
         }
     }
 
@@ -64,10 +63,7 @@ public class AppHandler extends Menu {
             System.out.println("******************************************************************************************");
             List<Country> countries = this.getInitalCountryList();
             this.showCountries(countries);
-            System.out.println("******************************************************************************************");
-            System.out.println("Ingresa cualquier número o letra para regresar al menú...");
-            userInput.next();
-            setOption(0);
+            continueOptionToMenu();
         }
     }
 
@@ -96,11 +92,8 @@ public class AppHandler extends Menu {
             this.setInitalCountryList(userCountry);
             this.showCountries(localCountries);
             // continuidad de la opción
-            System.out.println("******************************************************************************************");
-            System.out.println("¿Deseas añadir otro país? 'S' para continuar o 'N' para regresar al menu inicial: ");
-            validate.setDecision(userInput.next());
-            // se setea la opcion entre 1 y 0 dependiendo la validacion
-            setOption(validate.validateUserDecision(userInput, 3));
+            setContinueMessage("¿Deseas añadir otro país?");
+            continueOptionWithTwoOptions(this.getContinueMessage(), this.getOption());
         }
     }
 
@@ -123,17 +116,35 @@ public class AppHandler extends Menu {
                 String countryCode = countries.get(index).getCode();
                 countries = this.removeCountryFormList(index);
                 System.out.printf("Se ha eliminado %s de la lista...\n", countryCode);
-                System.out.println("******************************************************************************************");
-                System.out.println("¿Deseas remover otro país de la lista? 'S' para continuar o 'N' para regresar al menu inicial: ");
-                validate.setDecision(userInput.next());
-                setOption(validate.validateUserDecision(userInput, 4));
+                String continueMessage = "¿Deseas remover otro país de la lista?";
+                continueOptionWithTwoOptions(continueMessage, this.getOption());
             } else {
-                System.out.println("******************************************************************************************");
-                System.out.println("Ingresa cualquier número o letra para regresar al menú...");
-                userInput.next();
-                setOption(0);
+                continueOptionToMenu();
             }
         }
+    }
+
+    public void fiveOption() {
+        while (this.getOption() == 5) {
+            System.out.println("******************************************************************************************");
+            List<CurrencyPairConversion> userList = this.userHistory.getUserConversionList();
+            this.showUserHistory(userList);
+            continueOptionToMenu();
+        }
+    }
+
+    private void continueOptionWithTwoOptions(String message, int currentOption) {
+        System.out.println("******************************************************************************************");
+        System.out.printf("%s 'S' para continuar o 'N' para regresar al menu inicial: ", message);
+        validate.setDecision(userInput.next());
+        setOption(validate.validateUserDecision(userInput, currentOption));
+    }
+
+    private void continueOptionToMenu() {
+        System.out.println("******************************************************************************************");
+        System.out.println("Ingresa cualquier número o letra para regresar al menú...");
+        userInput.next();
+        setOption(0);
     }
 
     public int getOption() {
@@ -154,5 +165,13 @@ public class AppHandler extends Menu {
 
     public void setApiCalls(int apiCalls) {
         this.apiCalls = apiCalls;
+    }
+
+    public String getContinueMessage() {
+        return continueMessage;
+    }
+
+    public void setContinueMessage(String continueMessage) {
+        this.continueMessage = continueMessage;
     }
 }
