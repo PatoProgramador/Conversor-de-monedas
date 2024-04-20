@@ -13,7 +13,6 @@ public class AppHandler extends Menu {
     CurrencyPairConversion currencyPairConversion = new CurrencyPairConversion();
     private Validator validate = new Validator();
     ConsultAPI consulter = new ConsultAPI();
-    private List<Country> apiCountries = new ArrayList<>();
     private int option = 0;
     private int apiCalls = 0;
 
@@ -23,7 +22,7 @@ public class AppHandler extends Menu {
             // lista actual de paises y scanner
             List<Country> countries = this.getInitalCountryList();
             Scanner input = this.getInput();
-            this.showCountries();
+            this.showCountries(countries);
             // opciones iniciales para el validador: Los paises se lista de 1 al maximo de la lista/ inicialmente hasta 6
             validate.setMaxIndex(countries.size());
             validate.setMinIndex(1);
@@ -61,9 +60,10 @@ public class AppHandler extends Menu {
     }
 
     public void secondOption() {
-        while (this.option == 2) {
+        while (this.getOption() == 2) {
             System.out.println("******************************************************************************************");
-            this.showCountries();
+            List<Country> countries = this.getInitalCountryList();
+            this.showCountries(countries);
             System.out.println("******************************************************************************************");
             System.out.println("Ingresa cualquier número o letra para regresar al menú...");
             userInput.next();
@@ -72,7 +72,36 @@ public class AppHandler extends Menu {
     }
 
     public void thirdOption() {
-
+        while (this.getOption() == 3) {
+            System.out.println("******************************************************************************************");
+            int count = this.getApiCalls();
+            Scanner userInput = this.getInput();
+            List<Country> localCountries = this.getInitalCountryList();
+            // evitar llamadas innecesarias a la API
+            if (count == 0) {
+                List<Country> apiValidCountries = consulter.consultCountries();
+                this.setApiCountries(apiValidCountries);
+                count++;
+                this.setApiCalls(count);
+            }
+            List<Country> apiContries = this.getApiCountries();
+            this.showCountries(apiContries);
+            System.out.println("Selecciona el número del país que desees añadir (Por ej. 15): ");
+            // validacion de error
+            int userIndex = userInput.nextInt();
+            Country userCountry = apiContries.get(userIndex - 1);
+            userCountry = validate.validateAddItemtoList(userCountry, localCountries, apiContries, userInput);
+            // adicion a la lista
+            System.out.println("Se ha añadido tu país a la lista...");
+            this.setInitalCountryList(userCountry);
+            this.showCountries(localCountries);
+            // continuidad de la opción
+            System.out.println("******************************************************************************************");
+            System.out.println("¿Deseas añadir otro país? 'S' para continuar o 'N' para regresar al menu inicial: ");
+            validate.setDecision(userInput.next());
+            // se setea la opcion entre 1 y 0 dependiendo la validacion
+            setOption(validate.validateUserDecision(userInput, 3));
+        }
     }
 
     public int getOption() {
@@ -93,13 +122,5 @@ public class AppHandler extends Menu {
 
     public void setApiCalls(int apiCalls) {
         this.apiCalls = apiCalls;
-    }
-
-    public List<Country> getApiCountries() {
-        return apiCountries;
-    }
-
-    public void setApiCountries(List<Country> apiCountries) {
-        this.apiCountries = apiCountries;
     }
 }

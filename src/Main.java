@@ -25,19 +25,9 @@ public class Main {
                     case 2:
                         app.secondOption();
                         break;
-//                    case 3:
-//                        if (apiCalls == 0) {
-//                            apiCountries = consulter.getApiCountries();
-//                            apiCalls++;
-//                        }
-//                        System.out.println("-----Lista de paises validos-----");
-//                        for (int i = 0; i < apiCountries.size(); i++) {
-//                            System.out.println((i + 1) + ". " + apiCountries.get(i));
-//                        }
-//                        System.out.println("Selecciona el número del país que deseas añadir (Por ej. 1): ");
-//                        int userIn = input.nextInt();
-//                        Country apiCountry = apiCountries.get(userIn - 1);
-//                        break;
+                    case 3:
+                        app.thirdOption();
+                        break;
                     case 7:
                         app.appFinalMessage();
                         break;

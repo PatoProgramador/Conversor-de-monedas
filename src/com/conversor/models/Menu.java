@@ -12,6 +12,8 @@ public class Menu {
             new Country("COP", "Peso colombiano"),
             new Country("USD", "Dolar estadounidense")
     ));
+
+    private List<Country> apiCountries = new ArrayList<>();
     private String menuItems = """
             1. Hacer conversión de moneda.
             2. Ver el listado actual de monedas.
@@ -28,11 +30,10 @@ public class Menu {
         return menuItems;
     }
 
-    public void showCountries() {
-        System.out.println("-----Lista de paises disponibles-----");
-
-        for (int i = 0; i < initalCountryList.size(); i++) {
-            System.out.println( (i + 1) + "." + initalCountryList.get(i));
+    public void showCountries(List<Country> country) {
+        System.out.println("-----Lista de paises-----");
+        for (int i = 0; i < country.size(); i++) {
+            System.out.println( (i + 1) + "." + country.get(i));
         }
     }
 
@@ -41,7 +42,16 @@ public class Menu {
         System.out.println("Saliendo de la app....");
     }
 
-    public void setInitalCountryList(List<Country> countryList) {
-        this.initalCountryList = countryList;
+    public List<Country> setInitalCountryList(Country country) {
+        this.initalCountryList.add(country);
+        return this.getInitalCountryList();
+    }
+
+    public List<Country> getApiCountries() {
+        return apiCountries;
+    }
+
+    public void setApiCountries(List<Country> apiCountries) {
+        this.apiCountries = apiCountries;
     }
 }

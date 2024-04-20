@@ -1,5 +1,9 @@
 package com.conversor.models.utils;
 
+import com.conversor.models.Country;
+
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Validator {
@@ -38,6 +42,22 @@ public class Validator {
         } else {
             return 0;
         }
+    }
+
+    public Country validateAddItemtoList(Country country, List<Country> countryList, List<Country> compareList, Scanner input) {
+        Country finalCountry = country;
+        String countryCode = country.getCode();
+        List<String> localCountryCodes = new ArrayList<>();
+        for (Country currentCountry : countryList) {
+            localCountryCodes.add(currentCountry.getCode());
+        }
+        while (localCountryCodes.contains(countryCode)) {
+            System.out.println("El país que ingresaste ya se encuentra en la lista, por favor intenta ingresando uno nuevo: ");
+            int userIn = input.nextInt();
+            finalCountry = compareList.get(userIn - 1);
+            countryCode = finalCountry.getCode();
+        }
+        return finalCountry;
     }
 
     public void setBaseIndex(int index) {

@@ -32,7 +32,7 @@ public class ConsultAPI extends HttpJsonResponse {
         }
     }
 
-    public List<Country> getApiCountries() {
+    public List<Country> consultCountries() {
         URI apiUrl = URI.create(url + "/codes");
         List<Country> apiCountries = new ArrayList<>();
         try {
@@ -46,7 +46,6 @@ public class ConsultAPI extends HttpJsonResponse {
                 String name = countryItems.get(1).getAsString();
                 apiCountries.add(new Country(code, name));
             }
-            System.out.println("SE HIZO UN LLAMADOOOOOOOOOOOOOOOO");
             return apiCountries;
         } catch (Exception e) {
             throw new RuntimeException("No fue posible obtener los paises de la API.");
