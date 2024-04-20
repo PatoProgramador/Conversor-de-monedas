@@ -18,32 +18,33 @@ public class AppHandler extends Menu {
     private int apiCalls = 0;
 
     public void firstOption() {
-        while (this.option == 1) {
+        while (this.getOption() == 1) {
             System.out.println("******************************************************************************************");
-            // lista actual de paises
+            // lista actual de paises y scanner
             List<Country> countries = this.getInitalCountryList();
+            Scanner input = this.getInput();
             this.showCountries();
             // opciones iniciales para el validador: Los paises se lista de 1 al maximo de la lista/ inicialmente hasta 6
             validate.setMaxIndex(countries.size());
             validate.setMinIndex(1);
             System.out.println("Selecciona la moneda base (Por ej. 1): ");
             // validacion de error: El validator recibe el input para setearse
-            validate.setBaseIndex(userInput.nextInt());
-            int baseIndex = validate.validateInputMintoMax(userInput);
+            validate.setBaseIndex(input.nextInt());
+            int baseIndex = validate.validateInputMintoMax(input);
             // Busqueda y asignacion del codigo del pais base
             Country userCountryBase = countries.get(baseIndex - 1);
             currencyPairConversion.setBaseCode(userCountryBase.getCode());
             // Busqueda y asignacion del codigo del pais target
             System.out.println("Selecciona la moneda a la cual deseas cambiar el monto: ");
             // validacion de error en el segundo caso
-            validate.setTargetIndex(userInput.nextInt());
-            int targetIndex = validate.validateInputMintoMax(userInput);
-            targetIndex = validate.validateBaseTargetIndexNotEquals(userInput);
+            validate.setTargetIndex(input.nextInt());
+            int targetIndex = validate.validateInputMintoMax(input);
+            targetIndex = validate.validateBaseTargetIndexNotEquals(input);
             Country userCountryTarget = countries.get(targetIndex - 1);
             currencyPairConversion.setTargetCode(userCountryTarget.getCode());
             // Monto a transformar
             System.out.printf("Ingresa el monto que deseas convertir de '%s' a '%s': %n", currencyPairConversion.getBaseCode(), currencyPairConversion.getTargetCode());
-            double userAmount = userInput.nextDouble();
+            double userAmount = input.nextDouble();
             currencyPairConversion.setAmount(userAmount);
             // Operacion con la API
             consulter.exchangeCurrencyPair(currencyPairConversion);
@@ -53,9 +54,9 @@ public class AppHandler extends Menu {
             System.out.println("******************************************************************************************");
             // continuidad de la opción
             System.out.println("¿Deseas realizar otra conversión de moneda? 'S' para continuar o 'N' para regresar al menu inicial: ");
-            validate.setDecision(userInput.next());
+            validate.setDecision(input.next());
             // se setea la opcion entre 1 y 0 dependiendo la validacion
-            setOption(validate.validateUserDecision(userInput, 1));
+            setOption(validate.validateUserDecision(input, 1));
         }
     }
 
@@ -68,6 +69,10 @@ public class AppHandler extends Menu {
             userInput.next();
             setOption(0);
         }
+    }
+
+    public void thirdOption() {
+
     }
 
     public int getOption() {
