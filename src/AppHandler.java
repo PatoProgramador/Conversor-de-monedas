@@ -104,6 +104,38 @@ public class AppHandler extends Menu {
         }
     }
 
+    public void fourthOption() {
+        while (this.getOption() == 4) {
+            System.out.println("******************************************************************************************");
+            List<Country> countries = this.getInitalCountryList();
+            boolean validateOperation = validate.validateArraySize(countries);
+            if (validateOperation) {
+                // opciones iniciales para el validador
+                validate.setMaxIndex(countries.size());
+                validate.setMinIndex(1);
+                Scanner userInput = this.getInput();
+                this.showCountries(countries);
+                System.out.println("Selecciona el pais que deseas quitar de la lista (por ej. 5): ");
+                // validaciones
+                validate.setBaseIndex(userInput.nextInt());
+                int index = validate.validateInputMintoMax(userInput);
+                index = index - 1;
+                String countryCode = countries.get(index).getCode();
+                countries = this.removeCountryFormList(index);
+                System.out.printf("Se ha eliminado %s de la lista...\n", countryCode);
+                System.out.println("******************************************************************************************");
+                System.out.println("¿Deseas remover otro país de la lista? 'S' para continuar o 'N' para regresar al menu inicial: ");
+                validate.setDecision(userInput.next());
+                setOption(validate.validateUserDecision(userInput, 4));
+            } else {
+                System.out.println("******************************************************************************************");
+                System.out.println("Ingresa cualquier número o letra para regresar al menú...");
+                userInput.next();
+                setOption(0);
+            }
+        }
+    }
+
     public int getOption() {
         return option;
     }

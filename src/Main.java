@@ -28,6 +28,9 @@ public class Main {
                     case 3:
                         app.thirdOption();
                         break;
+                    case 4:
+                        app.fourthOption();
+                        break;
                     case 7:
                         app.appFinalMessage();
                         break;

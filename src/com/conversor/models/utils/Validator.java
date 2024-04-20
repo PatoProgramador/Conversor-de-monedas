@@ -19,7 +19,7 @@ public class Validator {
             int userIn = input.nextInt();
             setBaseIndex(userIn);
         }
-        return this.baseIndex;
+        return getBaseIndex();
     }
 
     public int validateBaseTargetIndexNotEquals(Scanner input) {
@@ -60,6 +60,15 @@ public class Validator {
         return finalCountry;
     }
 
+    public boolean validateArraySize(List<Country> countries) {
+        if (countries.size() == 2) {
+            System.out.println("No puedes eliminar más paises de la lista, se necesitan al menos dos para realizar las conversiones.");
+            return false;
+        } else {
+            return true;
+        }
+    }
+
     public void setBaseIndex(int index) {
         this.baseIndex = index;
     }
@@ -77,5 +86,9 @@ public class Validator {
     }
     public void setDecision(String decision) {
         this.decision = decision;
+    }
+
+    public int getBaseIndex() {
+        return baseIndex;
     }
 }

@@ -47,6 +47,11 @@ public class Menu {
         return this.getInitalCountryList();
     }
 
+    public List<Country> removeCountryFormList(int index) {
+        this.initalCountryList.remove(index);
+        return this.getInitalCountryList();
+    }
+
     public List<Country> getApiCountries() {
         return apiCountries;
     }
