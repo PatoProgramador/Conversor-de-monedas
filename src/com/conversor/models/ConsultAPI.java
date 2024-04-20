@@ -1,38 +1,55 @@
 package com.conversor.models;
 
+import com.conversor.models.utils.HttpJsonResponse;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
 
 import java.net.URI;
-import java.net.http.HttpClient;
-import java.net.http.HttpRequest;
-import java.net.http.HttpResponse;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
-public class ConsultAPI {
+public class ConsultAPI extends HttpJsonResponse {
     private String url = "https://v6.exchangerate-api.com/v6/" + System.getenv("EXCHANGE-API-KEY");
 
     public void exchangeCurrencyPair(CurrencyPairConversion currencyPairConversion) {
         String pairBaseCode = currencyPairConversion.getBaseCode();
         String pairTargetCode = currencyPairConversion.getTargetCode();
         Double pairAmount = currencyPairConversion.getAmount();
+
         URI apiUrl = URI.create(url + "/pair/" + pairBaseCode + "/" + pairTargetCode + "/" + pairAmount);
 
-        HttpClient client = HttpClient.newHttpClient();
-        HttpRequest request = HttpRequest.newBuilder()
-                .uri(apiUrl)
-                .build();
         try {
-            HttpResponse<String> response = null;
-            response = client.send(request, HttpResponse.BodyHandlers.ofString());
+            // metodo de clase madre
+            JsonObject jsonObject = getJsonResponseFromApi(apiUrl);
 
-            JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
             double amountConverted = jsonObject.get("conversion_result").getAsDouble();
 
             currencyPairConversion.setAmountConverted(amountConverted);
             currencyPairConversion.setCreatedAt(LocalDateTime.now().toString());
         } catch (Exception e) {
-            throw new RuntimeException("No fue posible la conversion.");
+            throw new RuntimeException("No fue posible la conversion de moneda.");
+        }
+    }
+
+    public List<Country> getApiCountries() {
+        URI apiUrl = URI.create(url + "/codes");
+        List<Country> apiCountries = new ArrayList<>();
+        try {
+            // metodo de clase madre
+            JsonObject jsonObject = getJsonResponseFromApi(apiUrl);
+
+            JsonArray jsonArray = jsonObject.getAsJsonArray("supported_codes");
+            for (int i = 0; i < jsonArray.size(); i++) {
+                JsonArray countryItems = jsonArray.get(i).getAsJsonArray();
+                String code = countryItems.get(0).getAsString();
+                String name = countryItems.get(1).getAsString();
+                apiCountries.add(new Country(code, name));
+            }
+            System.out.println("SE HIZO UN LLAMADOOOOOOOOOOOOOOOO");
+            return apiCountries;
+        } catch (Exception e) {
+            throw new RuntimeException("No fue posible obtener los paises de la API.");
         }
     }
 }

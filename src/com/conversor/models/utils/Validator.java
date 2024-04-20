@@ -7,7 +7,7 @@ public class Validator {
     private int targetIndex;
     private int maxIndex;
     private int minIndex;
-//    private String decision;
+    private String decision;
 
     public int validateInputMintoMax(Scanner input) {
         while (this.baseIndex > this.maxIndex | this.baseIndex < this.minIndex) {
@@ -27,17 +27,18 @@ public class Validator {
         }
         return this.targetIndex;
     }
-//    public int validateUserDecision(Scanner input) {
-//        while (!this.decision.equals("S") && !this.decision.equals("N")) {
-//            System.out.println("Opcion invalida. Por favor digita 'S' para continuar o 'N' para regresar al menu inicial: ");
-//            setDecision(input.next());
-//        }
-//        if (this.decision.equals("S")) {
-//            return 1;
-//        } else {
-//            return 0;
-//        }
-//    }
+
+    public int validateUserDecision(Scanner input, int optionContext) {
+        while (!this.decision.equals("S") && !this.decision.equals("N")) {
+            System.out.println("Opcion invalida. Por favor digita 'S' para continuar o 'N' para regresar al menu inicial: ");
+            setDecision(input.next());
+        }
+        if (this.decision.equals("S")) {
+            return optionContext;
+        } else {
+            return 0;
+        }
+    }
 
     public void setBaseIndex(int index) {
         this.baseIndex = index;
@@ -54,7 +55,7 @@ public class Validator {
     public void setTargetIndex(int targetIndex) {
         this.targetIndex = targetIndex;
     }
-    //    public void setDecision(String decision) {
-//        this.decision = decision;
-//    }
+    public void setDecision(String decision) {
+        this.decision = decision;
+    }
 }
