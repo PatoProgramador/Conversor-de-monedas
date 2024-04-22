@@ -33,11 +33,11 @@ public class Validator {
     }
 
     public int validateUserDecision(Scanner input, int optionContext) {
-        while (!this.decision.equals("S") && !this.decision.equals("N")) {
+        while (!this.decision.equalsIgnoreCase("S") && !this.decision.equalsIgnoreCase("N")) {
             System.out.println("Opcion invalida. Por favor digita 'S' para continuar o 'N' para regresar al menu inicial: ");
             setDecision(input.next());
         }
-        if (this.decision.equals("S")) {
+        if (this.decision.equalsIgnoreCase("S")) {
             return optionContext;
         } else {
             return 0;
