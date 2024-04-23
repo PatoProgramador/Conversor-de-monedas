@@ -40,7 +40,7 @@ Inicialmente se ejecuta un listado por defecto:
 
 A continuación exploramos cada opción del menú:
 
-#### 1. Hacer conversión de moneda
+### 1. Hacer conversión de moneda
 
 - Al seleccionar esta opción primero se mostrará el listado actual de monedas:
 
