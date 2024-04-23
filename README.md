@@ -25,7 +25,12 @@ En estas app te encuentras seis opciones (La ultima sale como 7 por propositos d
     
 Te dejo aquí los atajos para que puedas verlas de forma más rápida:
 
-- [1. Hacer conversión de moneda](#hacer-conversion-de-moneda)    
+- [1. Hacer conversión de moneda](#hacer-conversion-de-moneda)
+- [2. Ver listado actual de monedas](#ver-listado-actual-de-monedas)
+- [3. Agregar una moneda al listado](#agregar-una-moneda-al-listado)
+- [4. Eliminar una moneda del listado](#eliminar-una-moneda-del-listado)
+- [5. Ver tu historial de conversión de monedas](#ver-tu-historial-de-conversion-de-monedas)
+- [7. salir](#salir) 
     
 La app funciona con un listado de monedas para facilitar la interacción y ampliar las posibilidades de conversión de monedas. Este listado puede ser modificado a gusto del usuario.
 
@@ -73,7 +78,7 @@ Es importante mencionar que para el funcionamiento de esta opción se hace una p
 Y sus respuestas salen en formato json de la siguiente forma:
 ![image](https://github.com/PatoProgramador/Conversor-de-monedas/assets/72218702/4c5d0ffe-4616-484a-be54-351e94ac31d5)
 
-#### 2. Ver el listado actual de monedas
+### Ver el listado actual de monedas
 
 Dado que la lista es modificable, quizá quieras ver tu lista actual, una vez ingreses la opción 2 en el menú te mostrará la lista actualizada que tienes disponible:
 
@@ -83,7 +88,7 @@ Finalmente, te pide que ingreses cualquier caracter para regresar al menu:
 
 ![image](https://github.com/PatoProgramador/Conversor-de-monedas/assets/72218702/4c84aca8-b895-45e4-a350-17594c731602)
 
-#### 3. Agregar una moneda al listado
+### Agregar una moneda al listado
 
 - Al seleccionar esta opción, primero te mostrará una lista de países que puedes añadir a tu lista:
 
@@ -113,7 +118,7 @@ Este llamado retornada un Json con todos los paises que soporta la API:
 
 (La app de fondo guarda la lista de paises para evitar hacer más llamados a la API, es decir, luego de mostrar la lista por primer vez ya no hace llamados a la API, sino que muestra una lista que guarda la app misma)
 
-#### 4. Eliminar una moneda del listado
+### Eliminar una moneda del listado
 
 - Al seleccionar esta opción te mostrará el listado actual para que puedas decidir cual eliminar, en este ejemplo seleccionamos 9 para eliminar el YER:
 
@@ -132,7 +137,7 @@ Aquí no hacemos peticiones a la API dado que se interactua puramente con las li
 ![image](https://github.com/PatoProgramador/Conversor-de-monedas/assets/72218702/f2fe99af-e4a1-4571-b410-ac0edf41e8bc)
 
 
-#### 5. Ver tu historial de conversión de monedas
+### Ver tu historial de conversión de monedas
 
 Al seleccionar esta opción te saldrá tu historial de todas las conversiones de moneda que haz hecho, organizadas desde la más antigua hasta la más reciente mostrandote los datos relativos a la conversión que realizaste en su momento.
 
@@ -156,3 +161,7 @@ Para la ejecución de la app es necesario seguir los pasos que te presento a con
 
 - Finalmente, añades tu api-key en el apartado de variables de entorno con el nombre de la variable: `EXCHANGE-API-KEY` y seleccionas `OK`.
 <img  alt="env" width="700px" height="600px" src="https://github.com/PatoProgramador/Conversor-de-monedas/assets/72218702/ff59113e-5cff-4135-9df9-e0558bb371f7" >
+
+### salir
+
+Espero que no hagas llegado hasta aquí porque clickeaste la opción salir 🤨
