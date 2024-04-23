@@ -26,7 +26,7 @@ En estas app te encuentras seis opciones (La ultima sale como 7 por propositos d
 Te dejo aquí los atajos para que puedas verlas de forma más rápida:
 
 - [1. Hacer conversión de moneda](#hacer-conversion-de-moneda)
-- [2. Ver listado actual de monedas](#ver-listado-actual-de-monedas)
+- [2. Ver listado actual de monedas](#ver-el-listado-actual-de-monedas)
 - [3. Agregar una moneda al listado](#agregar-una-moneda-al-listado)
 - [4. Eliminar una moneda del listado](#eliminar-una-moneda-del-listado)
 - [5. Ver tu historial de conversión de monedas](#ver-tu-historial-de-conversion-de-monedas)
@@ -137,7 +137,7 @@ Aquí no hacemos peticiones a la API dado que se interactua puramente con las li
 ![image](https://github.com/PatoProgramador/Conversor-de-monedas/assets/72218702/f2fe99af-e4a1-4571-b410-ac0edf41e8bc)
 
 
-### Ver tu historial de conversión de monedas
+### Ver tu historial de conversion de monedas
 
 Al seleccionar esta opción te saldrá tu historial de todas las conversiones de moneda que haz hecho, organizadas desde la más antigua hasta la más reciente mostrandote los datos relativos a la conversión que realizaste en su momento.
 
