@@ -25,7 +25,7 @@ En estas app te encuentras seis opciones (La ultima sale como 7 por propositos d
     
 Te dejo aquí los atajos para que puedas verlas de forma más rápida:
 
-- [1. Hacer conversión de moneda](#1.-hacer-conversion-de-moneda)    
+- [1. Hacer conversión de moneda](hacer-conversion-de-moneda)    
     
 La app funciona con un listado de monedas para facilitar la interacción y ampliar las posibilidades de conversión de monedas. Este listado puede ser modificado a gusto del usuario.
 
@@ -40,7 +40,7 @@ Inicialmente se ejecuta un listado por defecto:
 
 A continuación exploramos cada opción del menú:
 
-### 1. Hacer conversion de moneda
+### Hacer conversion de moneda
 
 - Al seleccionar esta opción primero se mostrará el listado actual de monedas:
 
