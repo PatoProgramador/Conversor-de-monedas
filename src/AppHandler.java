@@ -48,7 +48,6 @@ public class AppHandler extends Menu {
             consulter.exchangeCurrencyPair(currencyPairConversion);
             // historial
             userHistory.setUserHistoryList(currencyPairConversion);
-            System.out.println(this.userHistory.getUserConversionList());
             // Imprimir final
             System.out.println("******************************************************************************************");
             System.out.println(currencyPairConversion);
